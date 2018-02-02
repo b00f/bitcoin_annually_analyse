@@ -1,0 +1,61 @@
+"""
+analyse bitcoin price from CSV data based on blockchain.info's data (not 100% accurate, especially before 2010)
+"""
+
+import urllib2
+
+turl = "https://blockchain.info/charts/market-price?showDataPoints=false&timespan=all&show_header=true&daysAverageString=1&scale=0&format=csv&address="
+
+s = urllib2.urlopen(turl).read()
+
+with open('btcdata.csv','w') as f:
+    f.write(s)
+
+
+def getd():
+    with open('btcdata.csv','r') as f:
+        lines = f.readlines()
+        
+    return lines
+
+def avgc(li):
+    s = sum(li[:])
+    r = s/len(li)
+    return r
+
+d = getd()
+count = 0
+sump = 0
+oldyear = 2009
+avglist = list()
+lastavg = None
+price0 = -1
+print '** BTC price information **'
+print ''
+print 'Year .. Start of year  .. End of year .. Avg for year .. Increase'
+for x in d[:]:
+    x = x.replace('\n','')
+    date,price = x.split(',')
+    price = float(price)
+    nt = date.split(' ')[0]
+    if price == 0.0: continue
+    if price0 == -1: price0 = price
+    y,m,d = nt.split('-')
+    avglist.append(price)
+    if y != oldyear: 
+        avgy = avgc(avglist)
+        incr = 0
+        if lastavg != None:
+            incr = avgy/lastavg
+            lastavg = avgy
+        else:
+            lastavg = avgy
+        print oldyear,'  ','{:>10}'.format("%.2f" % round(price0,2)),'{:>14}'.format("%.2f" % round(price,2)),'  ','{:>12}'.format("%.2f" % round(avgy,2)),'  ','{:>10}'.format("%.2f" % round(incr,2))
+        
+        price0 = -1
+        oldyear = y
+        avglist = list()
+
+    sump += price
+    count+=1
+
