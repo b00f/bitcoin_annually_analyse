@@ -1,5 +1,5 @@
 
-
+```
 ** BTC price information **
 
 Year .. Start of year  .. End of year .. Avg for year .. Increase
@@ -12,4 +12,4 @@ Year .. Start of year  .. End of year .. Avg for year .. Increase
 2015        270.93         432.33          272.47          0.52
 2016        428.13         997.73          569.47          2.09
 2017       1023.14       15005.86         4094.69          7.19
-
+```
