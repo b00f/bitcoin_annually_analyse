@@ -26,13 +26,13 @@ def avgc(li):
 d = getd()
 count = 0
 sump = 0
-oldyear = 2009
+old_month = 1
 avglist = list()
 lastavg = None
 price0 = -1
 print '** BTC price information **'
 print ''
-print 'Year .. Start of year  .. End of year .. Avg for year .. Increase'
+print 'Month .. Start of month  .. End of month .. Avg for month .. Increase'
 for x in d[:]:
     x = x.replace('\n','')
     date,price = x.split(',')
@@ -42,7 +42,7 @@ for x in d[:]:
     if price0 == -1: price0 = price
     y,m,d = nt.split('-')
     avglist.append(price)
-    if y != oldyear: 
+    if m != old_month: 
         avgy = avgc(avglist)
         incr = 0
         if lastavg != None:
@@ -50,10 +50,10 @@ for x in d[:]:
             lastavg = avgy
         else:
             lastavg = avgy
-        print oldyear,'  ','{:>10}'.format("%.2f" % round(price0,2)),'{:>14}'.format("%.2f" % round(price,2)),'  ','{:>12}'.format("%.2f" % round(avgy,2)),'  ','{:>10}'.format("%.2f" % round(incr,2))
+        print '{}-{}'.format(y, m),'  ','{:>10}'.format("%.2f" % round(price0,2)),'{:>14}'.format("%.2f" % round(price,2)),'  ','{:>12}'.format("%.2f" % round(avgy,2)),'  ','{:>10}'.format("%.2f" % round(incr,2))
         
         price0 = -1
-        oldyear = y
+        old_month = m
         avglist = list()
 
     sump += price
