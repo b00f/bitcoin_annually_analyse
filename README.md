@@ -1,6 +1,22 @@
 # Bitcoin annually analyse
 
+## Yearly report
+```
+** BTC yearly price information **
 
+Year .. Start of year  .. End of year .. Avg for year .. Increase
+2009          0.07           0.07            0.07          0.00
+2010          0.07           0.30            0.17          2.30
+2011          0.30           5.50            6.08         35.70
+2012          5.61          13.40            8.52          1.40
+2013         13.49         746.90          192.82         22.64
+2014        806.21         316.15          522.98          2.71
+2015        270.93         432.33          272.47          0.52
+2016        428.13         997.73          569.47          2.09
+2017       1023.14       15005.86         4094.69          7.19
+```
+
+## Monthly report
 ```
 ** BTC price information **
 
