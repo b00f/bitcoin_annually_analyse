@@ -1,4 +1,5 @@
-# Bitcoin annually analyse
+# Bitcoin price analyse
+A python script that analyse bitcoin price based on [blockchain.info](https://blockchain.info) data.
 
 ## Yearly report
 ```
