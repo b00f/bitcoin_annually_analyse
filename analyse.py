@@ -23,39 +23,55 @@ def avgc(li):
     r = s/len(li)
     return r
 
-d = getd()
-count = 0
-sump = 0
-oldyear = 2009
-avglist = list()
-lastavg = None
-price0 = -1
-print '** BTC price information **'
-print ''
-print 'Year .. Start of year  .. End of year .. Avg for year .. Increase'
-for x in d[:]:
-    x = x.replace('\n','')
-    date,price = x.split(',')
-    price = float(price)
-    nt = date.split(' ')[0]
-    if price == 0.0: continue
-    if price0 == -1: price0 = price
-    y,m,d = nt.split('-')
-    avglist.append(price)
-    if y != oldyear: 
-        avgy = avgc(avglist)
-        incr = 0
-        if lastavg != None:
-            incr = avgy/lastavg
-            lastavg = avgy
-        else:
-            lastavg = avgy
-        print oldyear,'  ','{:>10}'.format("%.2f" % round(price0,2)),'{:>14}'.format("%.2f" % round(price,2)),'  ','{:>12}'.format("%.2f" % round(avgy,2)),'  ','{:>10}'.format("%.2f" % round(incr,2))
-        
-        price0 = -1
-        oldyear = y
-        avglist = list()
+def print_info(interval = 'm'):
+    d = getd()
+    count = 0
+    sump = 0
+    old = 1 if interval == 'm' else 2009
+    avglist = list()
+    lastavg = None
+    price0 = -1
+    if interval == 'y':
+        print '** BTC yearly price information **'
+        print ''
+        print 'Year .. Start of year  .. End of year .. Avg for year .. Increase'
+    else:
+        print '** BTC mothly price information **'
+        print ''
+        print 'Month .. Start of month  .. End of month .. Avg for month .. Increase'
+            
+    for x in d[:]:
+        x = x.replace('\n','')
+        date,price = x.split(',')
+        price = float(price)
+        nt = date.split(' ')[0]
+        if price == 0.0: continue
+        if price0 == -1: price0 = price
+        y,m,d = nt.split('-')
+        avglist.append(price)
+        the_interval = m if interval == 'm' else y
+        if the_interval != old: 
+            avgy = avgc(avglist)
+            incr = 0
+            if lastavg != None:
+                incr = avgy/lastavg
+                lastavg = avgy
+            else:
+                lastavg = avgy
+            
+            if interval == 'y':
+                print old,'  ','{:>10}'.format("%.2f" % round(price0,2)),'{:>14}'.format("%.2f" % round(price,2)),'  ','{:>12}'.format("%.2f" % round(avgy,2)),'  ','{:>10}'.format("%.2f" % round(incr,2))
+            else:
+                print '{}-{}'.format(y, m),'  ','{:>10}'.format("%.2f" % round(price0,2)),'{:>14}'.format("%.2f" % round(price,2)),'  ','{:>12}'.format("%.2f" % round(avgy,2)),'  ','{:>10}'.format("%.2f" % round(incr,2))
+            
+            price0 = -1
+            old = the_interval
+            avglist = list()
 
-    sump += price
-    count+=1
+        sump += price
+        count+=1
+    
+    print '\n\n'
 
+print_info('y')
+print_info('m')
