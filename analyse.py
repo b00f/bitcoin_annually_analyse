@@ -62,6 +62,8 @@ def print_info(interval = 'm'):
             if interval == 'y':
                 print old,'  ','{:>10}'.format("%.2f" % round(price0,2)),'{:>14}'.format("%.2f" % round(price,2)),'  ','{:>12}'.format("%.2f" % round(avgy,2)),'  ','{:>10}'.format("%.2f" % round(incr,2))
             else:
+                if m == '01':
+                   print ''
                 print '{}-{}'.format(y, m),'  ','{:>10}'.format("%.2f" % round(price0,2)),'{:>14}'.format("%.2f" % round(price,2)),'  ','{:>12}'.format("%.2f" % round(avgy,2)),'  ','{:>10}'.format("%.2f" % round(incr,2))
             
             price0 = -1
