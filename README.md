@@ -123,3 +123,8 @@ Month .. Start of month  .. End of month .. Avg for month .. Increase
 2018-02      15199.36        9083.26        12665.57          0.82
 
 ```
+
+## Bitcoin price by date
+To get bitcoin price in a specific date use this project: <br>
+https://github.com/TheYahya/bitcoin-price-by-date
+
